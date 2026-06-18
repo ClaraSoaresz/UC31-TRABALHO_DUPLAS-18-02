@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Placar do Campeonato</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>🏆 Placar do Campeonato</h1>
+
+        <h2>Líder Atual: {{ lider }}</h2>
+
+        <table>
+            <tr>
+                <th>Time</th>
+                <th>Pontos</th>
+                <th>Ações</th>
+            </tr>
+
+            {% for time, pontos in placar.items() %}
+            <tr>
+                <td>{{ time }}</td>
+                <td>{{ pontos }}</td>
+                <td>
+                    <a class="btn adicionar"
+                       href="{{ url_for('adicionar_ponto', time=time) }}">
+                        +1
+                    </a>
+
+                    <a class="btn remover"
+                       href="{{ url_for('tirar_ponto', time=time) }}">
+                        -1
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        <a class="zerar" href="{{ url_for('zerar') }}">
+            Zerar Campeonato
+        </a>
+
+    </div>
+
+</body>
+</html>
